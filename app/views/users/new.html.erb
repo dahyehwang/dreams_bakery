@@ -1,0 +1,18 @@
+<h1>New User Registration</h1>
+<form action="/users" method="post">
+	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
+	<label for="first_name">First Name: *</label>
+	<input type="text" id="first_name" name="user[first_name]" placeholder="First Name">
+	<label for="last_name">Last Name: *</label>
+	<input type="text"  id="last_name" name="user[last_name]" placeholder="Last Name">
+	<label for="name">Nickname:</label>
+	<input type="text"  id="nickname" name="user[nickname]" placeholder="Name">
+	<label for="email">Email: *</label>
+	<input type="text" id="email" name="user[email]" placeholder="Email">
+	<label for="password">Password: *</label>
+	<input type="password" id="password" name="user[password]" placeholder="Password">
+	<label for="password_confirmation">Password Confirmation: *</label>
+	<input type="password" id="password_confirmation" name="user[password_confirmation]" placeholder="Confirmation">
+	<input type='submit' value='Register' />
+</form>
+<br><a href="/login"><button type="button">Log In</button></a>
