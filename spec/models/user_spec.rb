@@ -24,50 +24,75 @@ RSpec.describe User, type: :model do
 
 	it "requires nickname to be unique" do
 		user1 = User.create(
-	first_name: "Jane",
-	last_name: "Doe",
-	nickname: "Jane",
-	email: "janethebest@codingdojo.com",
-	password: "password",
-	password_confirmation: "password"
-	)
+			first_name: "Jane",
+			last_name: "Doe",
+			nickname: "Jane",
+			email: "janethebest@codingdojo.com",
+			password: "password",
+			password_confirmation: "password"
+		)
 	user2 = User.new(
-	first_name: "Jane",
-	last_name: "Smith",
-	nickname: "Jane",
-	email: "jane@codingdojo.com",
-	password: "password",
-	password_confirmation: "password"
-	)
+			first_name: "Jane",
+			last_name: "Smith",
+			nickname: "Jane",
+			email: "jane@codingdojo.com",
+			password: "password",
+			password_confirmation: "password"
+		)
 		user2.valid?
 		expect(user2.errors[:nickname].first).to eq("has already been taken")
 	end
-	# it "should not save if email already exists." do
-	# User.create(
-	# first_name: "Jane",
-	# last_name: "Doe",
-	# nickname: "Doe",
-	# email: "janethebest@codingdojo.com",
-	# password: "password",
-	# password_confirmation: "password"
-	# )
-	# user = User.new(
-	# first_name: "Jane",
-	# last_name: "Smith",
-	# nickname: "Smith",
-	# email: "janethebest@codingdojo.com",
-	# password: "password",
-	# password_confirmation: "password"
-	# )
-	# expect(user).to be_invalid
-	# end
-
-	# it "should contain a valid email" do
-	# user = User.new(
-	# first_name: 'Roald',
-	# last_name: 'Dahl',
-	# email: 'roalddahl'
-	# )
-	# expect(user).to be_invalid
-	# end
+	it "allows nickname to be blank" do
+		user = User.create(
+			first_name: "Jane",
+			last_name: "Doe",
+			nickname: "",
+			email: "janethebest@codingdojo.com",
+			password: "password",
+			password_confirmation: "password"
+		)
+		user.valid?
+		expect(user.errors[:nickname].any?).to eq(false)
+	end
+	it 'requires an email' do
+  	user = User.new(email: '')
+  	user.valid?
+  	expect(user.errors[:email].any?).to eq(true)
+  end
+  it 'accepts properly formatted email' do
+  	emails = ['steph@dubs.com', 'steph.curry@dubs.com']
+  	emails.each do |email|
+  		user = User.new(email: email)
+  		user.valid?
+  		expect(user.errors[:email].any?).to eq(false)
+  	end
+  end
+  it 'rejects improperly formatted email' do
+  	emails = %w[@ user@ @example.com]
+  	emails.each do |email|
+  		user = User.new(email: email)
+  		user.valid?
+  		expect(user.errors[:email].any?).to eq(true)
+  	end
+  end
+  it 'requires a unique, case insensitive email address' do
+  	user1 = User.create(first_name: 'steph', last_name: 'curry', email: 'steph@dubs.com', password: 'password', password_confirmation: 'password')
+  	user2 = User.new(email: user1.email.upcase)
+  	user2.valid?
+  	expect(user2.errors[:email].first).to eq("has already been taken")
+  end
+	it 'requires a password' do
+  	user = User.new(password: '')
+  	user.valid?
+  	expect(user.errors[:password].any?).to eq(true)
+  end
+  it 'requires the password to match the password confirmation' do
+  	user = User.new(password: 'password', password_confirmation: 'not password')
+  	user.valid?
+  	expect(user.errors[:password_confirmation].first).to eq("doesn't match Password")
+  end
+  it 'automatically encrypts the password into the password_digest attribute' do
+  	user = User.create(first_name:'steph', last_name:'curry', email: 'steph@dubs.com', password: 'password', password_confirmation: 'password')
+  	expect(user.password_digest.present?).to eq(true)
+  end
 end
