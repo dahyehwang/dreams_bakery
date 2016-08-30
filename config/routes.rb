@@ -1,4 +1,20 @@
 Rails.application.routes.draw do
+
+  # root 'messages#index'
+
+  ################# SESSIONS ####################
+
+  get 'login' => 'sessions#new'
+  
+  post 'sessions' => 'sessions#create'
+
+  delete 'sessions' => 'sessions#destroy'
+
+  ################# USERS ####################
+
+  # get 'registration' => 'users#new'
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
