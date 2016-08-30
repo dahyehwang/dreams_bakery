@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  # root 'messages#index'
+  root 'messages#index'
 
   ################# SESSIONS ####################
 
@@ -12,7 +12,31 @@ Rails.application.routes.draw do
 
   ################# USERS ####################
 
-  # get 'registration' => 'users#new'
+  get 'registration' => 'users#new'
+
+  post 'users' => 'users#create'
+
+  get 'users/:id' => 'users#show'
+
+  patch 'users/:id' => 'users#update'
+
+  delete 'users/:id' => 'users#destroy'
+
+  ################### MESSAGES #####################
+
+  get 'messages/:message_id' => 'messages#show'
+
+  post "messages" => 'messages#create_post'
+
+  post 'messages/:parent_id' => 'messages#create_comment'
+
+  delete 'messages/:message_id' => 'messages#destroy'
+
+  ################### LIKES #####################
+
+  post 'likes/:message_id' => 'likes#create'
+
+  delete 'likes/:message_id' => 'likes#destroy'
 
 
   # The priority is based upon order of creation: first created -> highest priority.
