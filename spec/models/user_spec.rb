@@ -95,4 +95,22 @@ RSpec.describe User, type: :model do
   	user = User.create(first_name:'steph', last_name:'curry', email: 'steph@dubs.com', password: 'password', password_confirmation: 'password')
   	expect(user.password_digest.present?).to eq(true)
   end
+  describe 'relationships' do
+    it 'has many messages' do
+      user = User.create(first_name:'steph', last_name:'curry', email: 'steph@dubs.com', password: 'password', password_confirmation: 'password')
+      message1 = user.messages.create(content: 'message 1')
+      message2 = user.messages.create(content: 'message 2')
+      expect(user.messages).to include(message1)
+      expect(user.messages).to include(message2)
+    end
+    it 'has many likes' do
+      user = User.create(first_name:'steph', last_name:'curry', email: 'steph@dubs.com', password: 'password', password_confirmation: 'password')
+      message1 = user.messages.create(content: 'Oops')
+      message2 = user.messages.create(content: 'I did it again')
+      like1 = Like.create(user: user, message: message1)
+      like2 = Like.create(user: user, message: message2)
+      expect(user.likes).to include(like1)
+      expect(user.likes).to include(like2)
+    end
+  end
 end
