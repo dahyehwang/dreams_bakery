@@ -1,0 +1,26 @@
+<div>
+	<a href="/users/<%= current_user.id %>">Hi, <%= current_user.first_name %>!</a>
+</div>
+<div>
+	<form action="/messages" method="post">
+		<input type="hidden" name="authenticity_token" value = "<%= form_authenticity_token %>" >
+		<h1>What would you do if you: <input type="text" name="content" size="50" placeholder="Enter your dream here"> ?</h1>
+		<input type="submit" value="Post" >
+	</form>
+</div>
+<div>
+	Recent Questions:
+	<select name="filterOption">
+		<option value="dateDESC" selected="selected">Recent</option>
+		<option value="commentsDESC">Most Comments</option>
+		<option value="likesDESC">Most Likes</option>
+		<option value="dateASC">Oldest</option>
+		<option value="commentsASC">Least Comments</option>
+		<option value="likesASC">Least Likes</option>
+	</select>
+</div>
+<div>
+	<% @posts.each_with_index do |post, index| %>
+		<p><a href="/messages/<%= post.id %>"><%= post.content %></a> <%= post.likes.count %>likes / <%= @comment_count_array[index] %> comments</p>
+	<% end %>
+</div>
