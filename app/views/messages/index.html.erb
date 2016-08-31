@@ -1,7 +1,4 @@
 <div>
-	<a href="/users/<%= current_user.id %>">Hi, <%= current_user.first_name %>!</a>
-</div>
-<div>
 	<form action="/messages" method="post">
 		<input type="hidden" name="authenticity_token" value = "<%= form_authenticity_token %>" >
 		<h1>What would you do if you: <input type="text" name="content" size="50" placeholder="Enter your dream here"> ?</h1>

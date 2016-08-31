@@ -1,11 +1,7 @@
 <div>
-	<a href="/users/<%= current_user.id %>">Hi, <%= current_user.first_name %>!</a>
-	<a href="/">Dashboard</a>
-</div>
-<div>
 	<h2>Post Area</h2>
 	<h3>
-		<% if @post.user.nickname %>
+		<% unless @post.user.nickname ==""%>
 			<p><%= @post.user.nickname %> asks:</p>
 		<% else %>
 			<p>Anonymous asks:</p>
@@ -24,7 +20,7 @@
 	<h2>Comment Area</h2>
 		<p><%@array_of_comments.each do |comment| %>
 			<h3>
-				<% if comment.user.nickname %>
+				<% unless comment.user.nickname == ""%>
 					<p><%= comment.user.nickname %> says:</p>
 				<% else %>
 					<p>Anonymous says:</p>
@@ -34,7 +30,12 @@
 			<form action="/messages/<%= comment.id %>" method="post">
 				<input type="hidden" name="authenticity_token" value = "<%= form_authenticity_token %>" >
 				<input type="hidden" name="post_id" value="<%= @post.id %>" >
+				<% unless comment.user.nickname == ""%>
 				<input type="text" name="content" value="<%= comment.user.nickname %>, " >
+				<% else %>
+				<input type="text" name="content" value="Anonymous, " >
+				
+				<% end %>
 				<input type="submit" value="Reply" >
 			</form>
 		<% end %> 
