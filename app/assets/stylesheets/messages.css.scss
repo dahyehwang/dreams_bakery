@@ -1,3 +1,45 @@
 // Place all the styles related to the Messages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.dream-input {
+	vertical-align: bottom;
+	border-radius: 10px;
+	border: 2px solid lightgrey;
+}
+
+#recent_questions {
+	display: inline-block;
+	vertical-align: bottom;
+	margin-top: 20px;
+}
+#filterOption {
+	vertical-align: middle;
+	margin-left: 20px;
+	margin-bottom: 20px;
+}
+
+.panel-title {
+	font-size: 24px !important;
+}
+
+.panel-primary {
+	margin-top: 40px;
+}
+
+.btn-group {
+}
+
+.replyBlock {
+	display: inline-block;
+}
+
+.postWell {
+	border: 2px solid lightgrey !important;
+}
+
+.commentWell {
+	border: 2px solid lightgrey !important;
+}
+
