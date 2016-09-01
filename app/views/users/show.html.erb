@@ -1,29 +1,30 @@
 
-<h2>Update Profile</h2>
+<h2>Show User Page</h2>
 <form action="/users/<%=@user.id%>" method="post">
 	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
 	<input type="hidden" name="_method" value="patch">
-	<p><label for="first_name">First Name: *</label>
-	<input type="text" id="first_name" name="user[first_name]" value="<%=@user.first_name%>" class="input"></p>
-	<p><label for="last_name">Last Name: *</label>
-	<input type="text"  id="last_name" name="user[last_name]" value="<%=@user.last_name%>" class="input"></p>
-	<p><label for="nickname">Nickname:</label>
-	<input type="text"  id="nickname" name="user[nickname]" value="<%=@user.nickname%>" class="input"></p>
-	<p><label for="email">Email: *</label>
-	<input type="text" id="email" name="user[email]" value="<%=@user.email%>" class="input"></p>
-	<input type='submit' value='Update' class="btn btn-primary"/>
+	<label for="first_name">First Name: *</label>
+	<input type="text" id="first_name" name="user[first_name]" value="<%=@user.first_name%>">
+	<label for="last_name">Last Name: *</label>
+	<input type="text"  id="last_name" name="user[last_name]" value="<%=@user.last_name%>">
+	<label for="nickname">Nickname:</label>
+	<input type="text"  id="nickname" name="user[nickname]" value="<%=@user.nickname%>">
+	<label for="email">Email: *</label>
+	<input type="text" id="email" name="user[email]" value="<%=@user.email%>">
+	<input type='submit' value='Update' />
 </form>
-<h2>Your Dreams:</h2>
+<h2>Your Questions:</h2>
+<h3>What would you do if you:</h3>
 <% if @posts %>
 <table>
 	<% @posts.each do |post| %>
 	<tr>
 		<td><%= post.content %></td>
-		<td><a href="/messages/<%=post.id%>/edit"><button type="button" class="btn btn-sm btn-primary" >Edit</button></a></td>
+		<td><a href="/messages/<%=post.id%>/edit"><button type="button">Edit</button></a></td>
 		<td><form action="/messages/<%=post.id%>" method="post"> 
 				<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
 				<input type='hidden' name='_method' value='delete'>
-				<input type="submit" value="Delete" class="btn btn-sm btn-danger">
+				<input type="submit" value="Delete">
 			</form>
 		</td>
 	</tr>
@@ -35,6 +36,6 @@
 <form action="/users/<%=@user.id%>" method="post"> 
 	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
 	<input type='hidden' name='_method' value='delete'>
-	<input type="submit" value="Delete Account" class="btn btn-danger">
+	<input type="submit" value="Delete Account">
 </form>
 <!-- <a href="/users/<%= @user.id %>" data-method="delete"><button type="button">Delete Account</button></a> -->
