@@ -1,6 +1,6 @@
 class MessagesController < ApplicationController
   before_action :require_login, only: [:index, :create_post, :create_comment, :show, :destroy]
-  before_action :require_correct_user, only: [:destroy]
+  # before_action :require_correct_user, only: [:destroy]
 
 ##################################################
   def index
@@ -58,8 +58,18 @@ class MessagesController < ApplicationController
 ##################################################
   def destroy
 	## This deletes a particular message. Only the owner of message may delete.
-		@message = Message.find(params[:message_id]).destroy
-		redirect_to '/'
+		@message = Message.find(params[:message_id])
+		if @message.user == current_user
+			@message = Message.find(params[:message_id]).destroy
+			if @message
+				flash[:notice] = "You have successfully deleted your post!"
+			else
+				flash[:alert] = "Could not delete post!"
+			end
+		else
+			flash[:alert] = "Cannot delete someone else's post!"
+		end
+		redirect_to "/users/#{current_user.id}"
   end
 
 
