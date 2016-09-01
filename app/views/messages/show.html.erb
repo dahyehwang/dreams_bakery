@@ -1,41 +1,101 @@
-<div>
-	<a href="/users/<%= current_user.id %>">Hi, <%= current_user.first_name %>!</a>
-	<a href="/">Dashboard</a>
-</div>
-<div>
-	<h2>Post Area</h2>
-	<h3>
-		<% if @post.user.nickname %>
-			<p><%= @post.user.nickname %> asks:</p>
-		<% else %>
-			<p>Anonymous asks:</p>
-		<% end %>
-	</h3>
-	<p><%= @post.content %> | Posted on: <%= @post.created_at %></p>
-	<form action="/messages/<%= @post.id %>" method="post">
-		<input type="hidden" name="authenticity_token" value = "<%= form_authenticity_token %>" >
-		<input type="hidden" name="post_id" value="<%= @post.id %>" >
-		<input type="text" name="content" value="<%= @post.user.nickname %>, " >
-		<input type="submit" value="Reply" >
-	</form>
-</div>
-<hr>
-<div>
-	<h2>Comment Area</h2>
-		<p><%@array_of_comments.each do |comment| %>
-			<h3>
-				<% if comment.user.nickname %>
-					<p><%= comment.user.nickname %> says:</p>
+
+	<h2>Dream</h2>
+	<div class="well postWell">
+		<div class="row">
+			<div class="col-md-1 likes">
+				<h4><%= @post.likes.count %> Likes</h4>
+				<% if @post.users_liked.include? (current_user) %>
+					<form action='/likes/<%= @post.id %>' method='post'>
+				      <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+				      <input type='hidden' name='post_id' value='<%= @post.id %>' >
+				      <input type='hidden' name='_method' value='delete'>
+				      <input type='submit' value='Unlike' class="btn btn-warning unlike">
+				    </form>
 				<% else %>
-					<p>Anonymous says:</p>
+					<form action='/likes/<%= @post.id %>' method='post'>
+					  <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+					  <input type='hidden' name='post_id' value='<%= @post.id %>' >
+					  <input type='submit' value='Like' class="btn btn-info like">
+					</form>
 				<% end %>
-			</h3>
-			<p><%= comment.content %> | Posted on: <%= comment.created_at %></p>
-			<form action="/messages/<%= comment.id %>" method="post">
-				<input type="hidden" name="authenticity_token" value = "<%= form_authenticity_token %>" >
-				<input type="hidden" name="post_id" value="<%= @post.id %>" >
-				<input type="text" name="content" value="<%= comment.user.nickname %>, " >
-				<input type="submit" value="Reply" >
-			</form>
+			</div>
+			<div class="col-md-10">
+				<div class="row">
+					<h3>
+						<% unless @post.user.nickname =="" || @post.user.nickname == nil%>
+							<p><%= @post.user.nickname %> asks:</p>
+						<% else %>
+							<p>Anonymous asks:</p>
+						<% end %>
+					</h3>
+					<p>What would you do if you <%= @post.content %></p>
+				</div>
+				<div class="row">
+					<form action="/messages/<%= @post.id %>" method="post" class="replyBlock">
+						<input type="hidden" name="authenticity_token" value = "<%= form_authenticity_token %>" >
+						<input type="hidden" name="post_id" value="<%= @post.id %>" >
+						<% unless @post.user.nickname == ""  || @post.user.nickname == nil %>
+							<input type="text" name="content" value="@<%= @post.user.nickname %>, " size="80">
+						<% else %>
+							<input type="text" name="content" value="@Anonymous, " size="80">
+						<% end %>
+						<input type="submit" value="Reply" class="btn btn-success btn-sm reply" >
+					</form>
+					<p class="timestamp pull-right">Posted on: <%= @post.created_at %></p>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<h2>Comments</h2>
+		<%@array_of_comments.each do |comment| %>
+			<div class="well commentWell">
+				<div class="row">
+					<div class="col-md-1 likes">
+						<h4><%= comment.likes.count %> Likes</h4>
+						<% if comment.users_liked.include? (current_user) %>
+							<form action='/likes/<%= comment.id %>' method='post'>
+						      <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+						      <input type='hidden' name='post_id' value='<%= @post.id %>' >
+						      <input type='hidden' name='_method' value='delete'>
+						      <input type='submit' value='Unlike' class="btn btn-warning unlike" >
+						    </form>
+						<% else %>
+							<form action='/likes/<%= comment.id %>' method='post'>
+							  <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+							  <input type='hidden' name='post_id' value='<%= @post.id %>' >
+							  <input type='submit' value='Like ' class="btn btn-info like" >
+							</form>
+						<% end %>
+					</div>
+					<div class="col-md-10">
+						<div class="row">
+							<h3>
+								<% unless comment.user.nickname == "" || comment.user.nickname == nil%>
+									<p><%= comment.user.nickname %> says:</p>
+								<% else %>
+									<p>Anonymous says:</p>
+								<% end %>
+							</h3>
+							<p><%= comment.content %></p>
+						</div>
+						<div class="row">
+							<form action="/messages/<%= comment.id %>" method="post">
+								<input type="hidden" name="authenticity_token" value = "<%= form_authenticity_token %>" >
+								<input type="hidden" name="post_id" value="<%= @post.id %>" >
+								<% unless comment.user.nickname == ""  || comment.user.nickname == nil%>
+								<input type="text" name="content" value="@<%= comment.user.nickname %>, " size="80" >
+								<% else %>
+								<input type="text" name="content" value="@Anonymous, " size="80" >
+								
+								<% end %>
+								<input type="submit" value="Reply" class="btn btn-success btn-sm replyBlock">
+								<p class="pull-right">Posted on: <%= comment.created_at %></p>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
 		<% end %> 
-</div>

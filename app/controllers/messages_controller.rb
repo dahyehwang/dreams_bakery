@@ -50,6 +50,7 @@ class MessagesController < ApplicationController
 	## This creates a new comment (message with parent. Parent can be post or comment)
 	## params[:parent_id] should be available to it
 		@comment = Message.create(content: params[:content], user: current_user, parent_id: params[:parent_id])
+		UserMailer.reply_email(@comment.parent.user).deliver
 		redirect_to "/messages/#{ params[:post_id] }"
   end
 

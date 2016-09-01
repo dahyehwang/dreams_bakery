@@ -12,6 +12,7 @@ class UsersController < ApplicationController
     user = User.create(get_user_info)
     if user.valid?
       session[:user_id] = user.id
+      UserMailer.welcome_email(user).deliver
       redirect_to "/", notice: "You have successfully registered!"
     else
       redirect_to :back, alert: user.errors.full_messages
