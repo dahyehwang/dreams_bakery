@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <h1>New User Registration</h1>
 <form action="/users" method="post" enctype="multipart/form-data">
 	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
@@ -16,5 +17,41 @@
 	<label for="password_confirmation">Password Confirmation: *</label>
 	<input type="password" id="password_confirmation" name="user[password_confirmation]" placeholder="Confirmation">
 	<input type='submit' value='Register' />
+||||||| merged common ancestors
+<h1>New User Registration</h1>
+<form action="/users" method="post">
+	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
+	<label for="first_name">First Name: *</label>
+	<input type="text" id="first_name" name="user[first_name]" placeholder="First Name">
+	<label for="last_name">Last Name: *</label>
+	<input type="text"  id="last_name" name="user[last_name]" placeholder="Last Name">
+	<label for="name">Nickname:</label>
+	<input type="text"  id="nickname" name="user[nickname]" placeholder="Name">
+	<label for="email">Email: *</label>
+	<input type="text" id="email" name="user[email]" placeholder="Email">
+	<label for="password">Password: *</label>
+	<input type="password" id="password" name="user[password]" placeholder="Password">
+	<label for="password_confirmation">Password Confirmation: *</label>
+	<input type="password" id="password_confirmation" name="user[password_confirmation]" placeholder="Confirmation">
+	<input type='submit' value='Register' />
+=======
+<h1>Registration</h1>
+<form action="/users" method="post">
+	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>" >
+	<p><label for="first_name">First Name: *</label>
+	<input type="text" id="first_name" name="user[first_name]" placeholder="First Name" class="input"></p>
+	<p><label for="last_name">Last Name: *</label>
+	<input type="text"  id="last_name" name="user[last_name]" placeholder="Last Name" class="input"></p>
+	<p><label for="name">Nickname:</label>
+	<input type="text"  id="nickname" name="user[nickname]" placeholder="Name" class="input"></p>
+	<p><label for="email">Email: *</label>
+	<input type="text" id="email" name="user[email]" placeholder="Email" class="input"></p>
+	<p><label for="password">Password: *</label>
+	<input type="password" id="password" name="user[password]" placeholder="Password" class="input"></p>
+	<p><label for="password_confirmation">Password Confirmation: *</label>
+	<input type="password" id="password_confirmation" name="user[password_confirmation]" placeholder="Confirmation" class="input"></p>
+	<input type='submit' value='Register' class="btn btn-primary"/>
+>>>>>>> 8b160d119dd3c2da5d40c0ba0db4a7e34b60780c
 </form>
-<br><a href="/login"><button type="button">Log In</button></a>
+<div class="h-divider"></div><p class="h-or"> or </p><div class="h-divider"></div>
+<div><a href="/login"><button type="button" class="btn btn-primary">Log In</button></a></div>

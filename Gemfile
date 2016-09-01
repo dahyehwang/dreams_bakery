@@ -29,12 +29,18 @@ gem 'rename'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 gem 'rails-footnotes', '>=4.0.0', '<5'
-gem "paperclip", "~> 4.2"
+
+gem 'bootstrap-sass', '~> 3.2.0'
+
 group :test, :development do
 	gem 'rspec' ## ???
   gem 'rspec-rails'
   gem 'database_cleaner'
 end
+
 group :test do
   gem 'capybara'
 end
+
+gem "paperclip", "~> 4.2"
+gem 'json', '~> 1.8.1' 
