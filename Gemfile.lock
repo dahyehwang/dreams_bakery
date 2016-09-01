@@ -178,6 +178,7 @@ DEPENDENCIES
   hirb
   jbuilder (~> 2.0)
   jquery-rails
+  json (~> 1.8.1)
   paperclip (~> 4.2)
   pg
   rails (= 4.1.8)

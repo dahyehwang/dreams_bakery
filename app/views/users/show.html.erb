@@ -1,13 +1,8 @@
 
-<<<<<<< HEAD
-<h2>Show User Page</h2>
+<h2>Update Profile</h2>
 <!--<%= image_tag @user.avatar.url %>-->
 <img src="<%=@user.avatar.url%>" alt="avatar_picture" width="60px" height="60px">
-||||||| merged common ancestors
-<h2>Show User Page</h2>
-=======
-<h2>Update Profile</h2>
->>>>>>> 8b160d119dd3c2da5d40c0ba0db4a7e34b60780c
+
 <form action="/users/<%=@user.id%>" method="post">
 	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
 	<input type="hidden" name="_method" value="patch">
