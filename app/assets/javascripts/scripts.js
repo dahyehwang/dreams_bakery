@@ -14,7 +14,7 @@ $('div.btn-group ul.dropdown-menu li a').click(function (e) {
       var options = {year: "numeric", month: "short", day: "numeric", hour: "2-digit", minute: "2-digit"};
       for(var i = 0; i < data.posts.length; i++){
         var form_date = new Date(data.posts[i].created_at);
-        str += "<h3><a href='/messages/"+data.posts[i].id+"'>What would you do if you "+data.posts[i].content+"</a></h3>"
+        str += "<h3><a href='/messages/"+data.posts[i].id+"'>What would you do if you <span class=\"bold\">"+data.posts[i].content+"</span></a></h3>"
         str += "<p>"+data.likes[i]+" likes / "+data.comments[i]+" comments / "
         str += form_date.toLocaleTimeString('en-us', options)+"</p>"
       }

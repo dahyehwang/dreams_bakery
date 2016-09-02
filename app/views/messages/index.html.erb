@@ -39,7 +39,7 @@
 
 	  <div class="panel-body">
 	  		<% @posts.each_with_index do |post, index| %>
-			<h3><a href="/messages/<%= post.id %>">What would you do if you <%= post.content %>?</a></h3>
+			<h3><a href="/messages/<%= post.id %>">What would you do if you <span class="bold"><%= post.content %></span>?</a></h3>
 			<p><%= post.likes.count %> likes / <%= @comment_count_array[index] %> comments / <%= post.created_at.strftime("%b %d, %Y %H:%M %p") %></p>	
 		<% end %>
 	  </div>

@@ -31,11 +31,11 @@
 </div>
 <% if flash[:alert] %>
 	<% flash[:alert].each do |error| %>
-		<p>* <%= error %></p>
+		<p class="red">* <%= error %></p>
 	<% end %>
 <% end %>
 <% if flash[:notice] %>
-	<p><%= flash[:notice] %></p>
+	<p class="green"><%= flash[:notice] %></p>
 <% end %>
 <div class="container center-container">
 <%= yield %>

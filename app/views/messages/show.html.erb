@@ -29,7 +29,7 @@
 							Anonymous asks:</p>
 						<% end %>
 					</h3>
-					<p>What would you do if you <%= @post.content %>?</p>
+					<p class="comment">What would you do if you <%= @post.content %>?</p>
 				</div>
 				<div class="row">
 					<form action="/messages/<%= @post.id %>" method="post" class="replyBlock">
@@ -81,7 +81,7 @@
 									Anonymous says:</p>
 								<% end %>
 							</h3>
-							<p><%= comment.content %></p>
+							<p class="comment"><%= comment.content %></p>
 						</div>
 						<div class="row">
 							<form action="/messages/<%= comment.id %>" method="post" class="replyBlock">
@@ -94,7 +94,8 @@
 								
 								<% end %>
 								<input type="submit" value="Reply" class="btn btn-success btn-sm replyBlock">
-								<p><%= comment.created_at.strftime("%b %d, %Y %H:%M %p") %></p>
+								<p><%= comment.created_at.strftime("%b %d, %Y %H:%M %p") %>
+									<%= link_to "Delete", destroy_comment_path(comment, @post), method: :delete, data: {confirm: "Are you sure?"}, class: "red" %></p>
 							</form>
 						</div>
 					</div>
