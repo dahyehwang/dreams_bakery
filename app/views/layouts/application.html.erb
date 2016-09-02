@@ -7,18 +7,28 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<% if current_user %>
-<h1 title="Click to see your page"><a href="/users/<%=current_user.id%>">Hi, <%= current_user.first_name %></a></h1>
-<% if params[:id] || params[:message_id] %>
-	<a href="/"><button type="button">Dashboard </button></a>
-<% end %>
-<form action="/sessions" method="post"> 
-	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
-	<input type='hidden' name='_method' value='delete'>
-	<input type="submit" value="Log Out">
-</form>
-<% end %>
+<div id="background"></div>
+<div class="container ">
+<div class="page-header">
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container vertical-align">
+		<% if current_user %>
+		<div class ="navbar-brend">
+			<a class=" welcome-user" href="/users/<%=current_user.id%>"><img class="avatar head_avatar" src="<%=current_user.avatar.url%>" alt="avatar_picture"></a>
+			<a class=" welcome-user" href="/users/<%=current_user.id%>">Hi, <%= current_user.first_name %></a>
+		</div>
+			<form class="logout" action="/sessions" method="post"> 
+				<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
+				<input type='hidden' name='_method' value='delete'>
+				<input type="submit" value="Log Out" class="btn btn-primary pull-right dashboard-button">
+			</form>
+			<% if params[:id] || params[:message_id] %>
+				<a href="/"><button type="button" class="btn btn-primary pull-right dashboard-button">Dashboard </button></a>
+			<% end %>
+		<% end %>
+		</div>
+	</nav>
+</div>
 <% if flash[:alert] %>
 	<% flash[:alert].each do |error| %>
 		<p>* <%= error %></p>
@@ -27,7 +37,9 @@
 <% if flash[:notice] %>
 	<p><%= flash[:notice] %></p>
 <% end %>
+<div class="container center-container">
 <%= yield %>
-
+</div>
+</div>
 </body>
 </html>
