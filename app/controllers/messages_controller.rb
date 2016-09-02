@@ -114,15 +114,29 @@ class MessagesController < ApplicationController
 			if @message
 				flash[:notice] = "You have successfully deleted your post!"
 			else
-				flash[:alert] = "Could not delete post!"
+				flash[:alert] = ["Could not delete post!"]
 			end
 		else
-			flash[:alert] = "Cannot delete someone else's post!"
+			flash[:alert] = ["Cannot delete someone else's post!"]
 		end
 		redirect_to "/users/#{current_user.id}"
   end
-
-
+##################################################
+  def destroy_comment
+  ## This deletes a particular message. Only the owner of message may delete.
+    @message = Message.find(params[:message_id])
+    if @message.user == current_user
+      @message = Message.find(params[:message_id]).destroy
+      if @message
+        flash[:notice] = "You have successfully deleted your comment!"
+      else
+        flash[:alert] = ["Could not delete comment!"]
+      end
+    else
+      flash[:alert] = ["Cannot delete someone else's comment!"]
+    end
+    redirect_to "/messages/#{params[:post_id]}"
+  end
 ##################################################
 private
 	def get_all_comments flattened_comments, commentList ## this is post.comments on the first run

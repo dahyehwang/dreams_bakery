@@ -32,6 +32,8 @@ Rails.application.routes.draw do
 
   post 'messages/:parent_id' => 'messages#create_comment' ## This creates a new comment (message with parent. Parent can be post or comment)
 
+  delete 'messages/:message_id/:post_id' => 'messages#destroy_comment', as: "destroy_comment" ## This deletes a particular message. Only the owner of message may delete.
+
   delete 'messages/:message_id' => 'messages#destroy' ## This deletes a particular message. Only the owner of message may delete.
 
   ################### LIKES #####################
