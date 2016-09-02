@@ -35,7 +35,7 @@
 						<input type="hidden" name="authenticity_token" value = "<%= form_authenticity_token %>" >
 						<input type="hidden" name="post_id" value="<%= @post.id %>" >
 						<% unless @post.user.nickname == ""  || @post.user.nickname == nil %>
-							<input type="text" name="content" value="@<%= @post.user.nickname %>, " size="80">
+							<input type="text" name="content" value="@<%= @post.user.nickname %>: " size="80">
 						<% else %>
 							<input type="text" name="content" value="@Anonymous, " size="80">
 						<% end %>
@@ -85,7 +85,7 @@
 								<input type="hidden" name="authenticity_token" value = "<%= form_authenticity_token %>" >
 								<input type="hidden" name="post_id" value="<%= @post.id %>" >
 								<% unless comment.user.nickname == ""  || comment.user.nickname == nil%>
-								<input type="text" name="content" value="@<%= comment.user.nickname %>, " size="80" >
+								<input type="text" name="content" value="@<%= comment.user.nickname %>: " size="80" >
 								<% else %>
 								<input type="text" name="content" value="@Anonymous, " size="80" >
 								
