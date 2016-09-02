@@ -27,11 +27,11 @@ class MessagesController < ApplicationController
   	if params[:option] == "dropdown-recents"
 			@posts = Message.where("parent_id is NULL").order("created_at DESC")
 		elsif params[:option] == "dropdown-likesDESC"
-			@posts = Message.select("messages.content, messages.parent_id, messages.user_id, messages.id, count(likes.id) AS likes_count").joins("LEFT JOIN likes ON messages.id = likes.message_id").where("parent_id is NULL").group("messages.id").order("likes_count DESC")
+			@posts = Message.select("messages.content, messages.parent_id, messages.user_id, messages.id, messages.created_at,count(likes.id) AS likes_count").joins("LEFT JOIN likes ON messages.id = likes.message_id").where("parent_id is NULL").group("messages.id").order("likes_count DESC")
 		elsif params[:option] == "dropdown-oldest"
 			@posts = Message.where("parent_id is NULL").order("created_at ASC")
 		elsif params[:option] == "dropdown-likesASC"
-			@posts = Message.select("messages.content, messages.parent_id, messages.user_id, messages.id, count(likes.id) AS likes_count").joins("LEFT JOIN likes ON messages.id = likes.message_id").where("parent_id is NULL").group("messages.id").order("likes_count ASC")
+			@posts = Message.select("messages.content, messages.parent_id, messages.user_id, messages.id, messages.created_at, count(likes.id) AS likes_count").joins("LEFT JOIN likes ON messages.id = likes.message_id").where("parent_id is NULL").group("messages.id").order("likes_count ASC")
 		else params[:option] == ""
 			@posts = Message.where("parent_id is NULL").order("created_at DESC")
 		end

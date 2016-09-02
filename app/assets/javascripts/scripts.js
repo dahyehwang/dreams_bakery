@@ -11,10 +11,12 @@ $('div.btn-group ul.dropdown-menu li a').click(function (e) {
     $.post("/messages/sort", {option: id}, function(data){
       console.log(data);
       var str = ""
+      var options = {year: "numeric", month: "short", day: "numeric", hour: "2-digit", minute: "2-digit"};
       for(var i = 0; i < data.posts.length; i++){
+        var form_date = new Date(data.posts[i].created_at);
         str += "<h3><a href='/messages/"+data.posts[i].id+"'>What would you do if you "+data.posts[i].content+"</a></h3>"
         str += "<p>"+data.likes[i]+" likes / "+data.comments[i]+" comments / "
-        str += "data.posts[i].created_at.strftime('%b %d, %Y %H:%M %p')</p>"
+        str += form_date.toLocaleTimeString('en-us', options)+"</p>"
       }
       $("div.panel-body").html(str);
     } );
