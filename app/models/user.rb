@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   before_save do
     self.email.downcase!
   end
-  has_attached_file :avatar
+  has_attached_file :avatar, :default_url => "/assets/eyeball2.png"
   validates_attachment_content_type :avatar, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 
   has_many :messages, dependent: :destroy
