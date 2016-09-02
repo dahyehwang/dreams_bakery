@@ -19,20 +19,28 @@
 		  		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Sort by <span class="caret"></span>
 		  		</button>
 		  		<ul class="dropdown-menu">
-		  			<li><a href="#">Recent</a></li>
-				    <li><a href="#">Most Comment</a></li>
-				    <li><a href="#">Most Likes</a></li>
-				    <li><a href="#">Oldest</a></li>
-				    <li><a href="#">Least Comments</a></li>
+		  			<li><a href="#" id="dropdown-recents">Recent</a></li>
+		  			<li><a href="#" id="dropdown-oldest">Oldest</a></li>
+				    <li><a href="#" id="dropdown-likesDESC">Most Likes</a></li>
+				    <li><a href="#" id="dropdown-likesASC">Least Likes</a></li>
 		  		</ul>
+		  		<!-- <form data-remote = "true" action = "/messages/sort" method = "post">
+		  			<select>
+		  				<option>Recent</option>
+		  				<option>Recent</option>
+		  				<option>Recent</option>
+		  			</select>
+		  			<input type = "submit" value = "click me">
+		  		</form> -->
 			</div>
 	    </h1>
 	  </div>
+
+
 	  <div class="panel-body">
 	  		<% @posts.each_with_index do |post, index| %>
 			<h3><a href="/messages/<%= post.id %>">What would you do if you <%= post.content %>?</a></h3>
-			<p><%= post.likes.count %> likes / <%= @comment_count_array[index] %> comments / <%= post.created_at.strftime("%b %d, %Y %H:%M %p") %></p>
-			
+			<p><%= post.likes.count %> likes / <%= @comment_count_array[index] %> comments / <%= post.created_at.strftime("%b %d, %Y %H:%M %p") %></p>	
 		<% end %>
 	  </div>
 	</div>
