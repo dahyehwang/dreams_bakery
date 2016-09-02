@@ -21,4 +21,3 @@
 /app/.DS_Store
 
 # Ignore database configuration for deployment branch
-/config/database.yml
