@@ -24,6 +24,8 @@ Rails.application.routes.draw do
 
   ################### MESSAGES #####################
 
+  post 'messages/sort' => 'messages#sort'
+
   get 'messages/:message_id' => 'messages#show' ## This shows a particular post. ":message_id" should only be post. Show not enabled for comments.
 
   post "messages" => 'messages#create_post' ## This creates a new post (message with no parent)

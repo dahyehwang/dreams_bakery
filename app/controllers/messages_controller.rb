@@ -2,17 +2,55 @@ class MessagesController < ApplicationController
   before_action :require_login, only: [:index, :create_post, :create_comment, :show, :destroy]
   before_action :require_correct_user, only: [:destroy]
 
+
+  # respond_to :html, :js
 ##################################################
   def index
 	## root route (AKA "/") displays the message board main page
 		## fetch all posts and put into @posts
-		@posts = Message.where("parent_id is NULL")
+		@posts = Message.where("parent_id is NULL").order("created_at DESC")
+
+				
 		@array_of_comments
 		@comment_count_array = @posts.map { |post|
 			@array_of_comments = []
 			get_all_comments @array_of_comments, post.comments
 			@array_of_comments.length
 		}
+
+  end
+
+##################################################
+  def sort
+  	if params[:option] == "dropdown-recents"
+			@posts = Message.where("parent_id is NULL").order("created_at DESC")
+		elsif params[:option] == "dropdown-likesDESC"
+			@posts = Message.select("messages.content, messages.parent_id, messages.user_id, messages.id, count(likes.id) AS likes_count").joins("LEFT JOIN likes ON messages.id = likes.message_id").where("parent_id is NULL").group("messages.id").order("likes_count DESC")
+		elsif params[:option] == "dropdown-oldest"
+			@posts = Message.where("parent_id is NULL").order("created_at ASC")
+		elsif params[:option] == "dropdown-likesASC"
+			@posts = Message.select("messages.content, messages.parent_id, messages.user_id, messages.id, count(likes.id) AS likes_count").joins("LEFT JOIN likes ON messages.id = likes.message_id").where("parent_id is NULL").group("messages.id").order("likes_count ASC")
+		else params[:option] == ""
+			@posts = Message.where("parent_id is NULL").order("created_at DESC")
+		end
+		@array_of_comments
+		@comment_count_array = @posts.map { |post|
+			@array_of_comments = []
+			get_all_comments @array_of_comments, post.comments
+			puts @array_of_comments.length
+			@array_of_comments.length
+		}
+		puts "\n\n\n\n\n"
+		print @comment_count_array
+
+		@likes_count_array = @posts.map { |post|
+			puts post.likes.count
+			post.likes.count
+		}
+		puts "\n\n\n\n\n"
+		print @likes_count_array
+		
+		render json: {posts: @posts, comments: @comment_count_array, likes: @likes_count_array}
 
   end
 
