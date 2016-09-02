@@ -66,7 +66,7 @@ class MessagesController < ApplicationController
 	  	if @post.parent_id == nil
 		  	@array_of_comments = []
 		  	if @post.comments
-		  		get_all_comments @array_of_comments, @post.comments
+		  		get_all_comments @array_of_comments, @post.comments.order("created_at DESC")
 		  	end
 		  else
 		  	redirect_to "/"
