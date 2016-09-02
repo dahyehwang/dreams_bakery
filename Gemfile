@@ -37,6 +37,10 @@ group :test, :development do
   gem 'rspec-rails'
   gem 'database_cleaner'
 end
+
 group :test do
   gem 'capybara'
 end
+
+gem "paperclip", "~> 4.2"
+gem 'json', '~> 1.8.1' 

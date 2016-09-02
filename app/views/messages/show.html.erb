@@ -28,7 +28,7 @@
 							<p>Anonymous asks:</p>
 						<% end %>
 					</h3>
-					<p>What would you do if you <%= @post.content %></p>
+					<p>What would you do if you <%= @post.content %>?</p>
 				</div>
 				<div class="row">
 					<form action="/messages/<%= @post.id %>" method="post" class="replyBlock">
@@ -37,7 +37,7 @@
 						<% unless @post.user.nickname == ""  || @post.user.nickname == nil %>
 							<input type="text" name="content" value="@<%= @post.user.nickname %>: " size="80">
 						<% else %>
-							<input type="text" name="content" value="@Anonymous, " size="80">
+							<input type="text" name="content" value="@Anonymous: " size="80">
 						<% end %>
 						<input type="submit" value="Reply" class="btn btn-success btn-sm reply" >
 					</form>
@@ -87,7 +87,7 @@
 								<% unless comment.user.nickname == ""  || comment.user.nickname == nil%>
 								<input type="text" name="content" value="@<%= comment.user.nickname %>: " size="80" >
 								<% else %>
-								<input type="text" name="content" value="@Anonymous, " size="80" >
+								<input type="text" name="content" value="@Anonymous: " size="80" >
 								
 								<% end %>
 								<input type="submit" value="Reply" class="btn btn-success btn-sm replyBlock">
