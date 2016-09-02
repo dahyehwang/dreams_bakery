@@ -1,10 +1,11 @@
 <h1>Log In</h1>
 <form action="/sessions" method="post"> 
 	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
-	<label for="email">Email:</label>
-	<input type="text" name="user[email]" id="email">
-	<label for="password">Password:</label>
-	<input type="password" name="user[password]" id="password">
-	<input type="submit" value="Log In">
+	<p><label for="email">Email:</label>
+	<input type="text" name="user[email]" id="email" class="input"></p>
+	<p><label for="password">Password:</label>
+	<input type="password" name="user[password]" id="password" class="input"></p>
+	<input type="submit" value="Log In" class="btn btn-primary">
 </form>
-<br><a href="/registration"><button type="button">Register</button></a>
+<div class="h-divider"></div><p class="h-or"> or </p><div class="h-divider"></div>
+<div><a href="/registration"><button type="button" class="btn btn-primary">Register</button></a></div>
