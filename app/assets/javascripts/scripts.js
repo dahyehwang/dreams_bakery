@@ -11,9 +11,12 @@ $('div.btn-group ul.dropdown-menu li a').click(function (e) {
     $.post("/messages/sort", {option: id}, function(data){
       console.log(data);
       var str = ""
+      var options = {year: "numeric", month: "short", day: "numeric", hour: "2-digit", minute: "2-digit"};
       for(var i = 0; i < data.posts.length; i++){
-        str += "<h3><a href='/messages/"+data.posts[i].id+"'>"+data.posts[i].content+"</a></h3>"
-        str += "<p>"+data.likes[i]+" likes / "+data.comments[i]+" comments</p>"
+        var form_date = new Date(data.posts[i].created_at);
+        str += "<h3><a href='/messages/"+data.posts[i].id+"'>What would you do if you "+data.posts[i].content+"</a></h3>"
+        str += "<p>"+data.likes[i]+" likes / "+data.comments[i]+" comments / "
+        str += form_date.toLocaleTimeString('en-us', options)+"</p>"
       }
       $("div.panel-body").html(str);
     } );
@@ -22,20 +25,3 @@ $('div.btn-group ul.dropdown-menu li a').click(function (e) {
 });
 
 });
-
-
-//   $('#new_user_form').submit(function(){
-//     $.post(
-//       $(this).attr('action'),
-//       $(this).serialize(),
-//       function(data){
-//         console.log('Data Received from the Ajax call', data);
-//         //put additional codes here to update html, etc.
-//         //for example things like
-//         $('#message').html(data.message);
-//       },
-//       "json"
-//     );
-//     return false;
-//   });
-// });
