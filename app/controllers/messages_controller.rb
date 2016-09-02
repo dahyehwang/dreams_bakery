@@ -18,6 +18,8 @@ class MessagesController < ApplicationController
 			@array_of_comments.length
 		}
 
+
+
   end
 
 ##################################################
@@ -79,7 +81,12 @@ class MessagesController < ApplicationController
   def create_post
 	## This creates a new post (message with no parent)
 		@post = Message.create(content: params[:content], user: current_user)
-		redirect_to "/"
+		
+		if @post.valid?
+      redirect_to "/", notice: "You have successfully created a dream!"
+    else
+      redirect_to :back, alert: @post.errors.full_messages
+    end
   end
 
 
@@ -88,8 +95,13 @@ class MessagesController < ApplicationController
 	## This creates a new comment (message with parent. Parent can be post or comment)
 	## params[:parent_id] should be available to it
 		@comment = Message.create(content: params[:content], user: current_user, parent_id: params[:parent_id])
-		UserMailer.reply_email(@comment.parent.user).deliver
-		redirect_to "/messages/#{ params[:post_id] }"
+		if @comment.valid?
+			UserMailer.reply_email(@comment.parent.user, @comment.parent).deliver
+      redirect_to "/messages/#{ params[:post_id] }", notice: "You have successfully created a comment!"
+    else
+      redirect_to "/messages/#{ params[:post_id] }", alert: @comment.errors.full_messages
+    end
+		
   end
 
 

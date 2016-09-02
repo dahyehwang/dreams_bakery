@@ -27,6 +27,7 @@
 
 .dashboard-button {
 	margin-left: 10px;
+	margin-top: 15px;
 }
 
 #background {
@@ -55,6 +56,11 @@
 
 .welcome-user {
 	text-decoration: underline;
+	color: grey;
+	font-size: 18px;
+}
+.navbar{
+	height: 66px;
 }
 .navbar-inverse {
     background-color: #211e1e;
@@ -65,3 +71,29 @@
     background-color: #1897d8;
     border-color: #1897d8;
 }
+
+.avatar {
+	border:1px solid #5c5c5c;
+	border-radius: 50%;
+	height: 60px;
+	width: 60px;
+	margin: 3px;
+	/*margin: 40px 0px 10px 0px;*/
+    }
+    .vertical-align img {
+    padding-top: 0px;
+}
+.head_avatar{
+	display: inline;
+	background: transparent;
+}
+.navbar-brend{
+	width: 30%;
+	display: inline-block;
+	padding-top: 0px;
+}
+.logout{
+	display: inline;
+	width: 0px;
+}
+

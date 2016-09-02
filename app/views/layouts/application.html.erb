@@ -13,8 +13,13 @@
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container vertical-align">
 		<% if current_user %>
-			<a class="navbar-brand welcome-user" href="/users/<%=current_user.id%>">Hi, <%= current_user.first_name %></a>
-			<form action="/sessions" method="post"> 
+		<div class ="navbar-brend">
+			
+			<a class=" welcome-user" href="/users/<%=current_user.id%>"><img class="avatar head_avatar" src="<%=current_user.avatar.url%>" alt="avatar_picture"></a>
+			
+			<a class=" welcome-user" href="/users/<%=current_user.id%>">Hi, <%= current_user.first_name %></a>
+		</div>
+			<form class="logout" action="/sessions" method="post"> 
 				<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
 				<input type='hidden' name='_method' value='delete'>
 				<input type="submit" value="Log Out" class="btn btn-primary pull-right dashboard-button">
@@ -26,7 +31,6 @@
 		</div>
 	</nav>
 </div>
-
 <% if flash[:alert] %>
 	<% flash[:alert].each do |error| %>
 		<p>* <%= error %></p>
