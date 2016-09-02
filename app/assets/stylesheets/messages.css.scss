@@ -31,9 +31,9 @@
 .btn-group {
 }
 
-.replyBlock {
+/*.replyBlock {
 	display: inline-block;
-}
+}*/
 
 .postWell {
 	border: 2px solid lightgrey !important;
@@ -41,9 +41,19 @@
 
 .commentWell {
 	border: 2px solid lightgrey !important;
+	width: 80%;
+    margin: 0 auto;
 }
 
 .panel-body {
 	background-color:rgba(255, 255, 255, 0.4) !important;
 }
-
+.likes .btn{
+	margin-left: 0px;
+}
+.col-md-10{
+	margin-left: 50px;
+}
+.replyBlock input[type^="text"]{
+	width: 80%;
+}

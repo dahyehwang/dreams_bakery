@@ -75,17 +75,23 @@
 .avatar {
 	border:1px solid #5c5c5c;
 	border-radius: 50%;
-	height: 60px;
-	width: 60px;
+	height: 40px;
+	width: 40px;
 	margin: 3px;
+	display: inline;
+	background: transparent;
 	/*margin: 40px 0px 10px 0px;*/
     }
-    .vertical-align img {
+	
+	.vertical-align img {
     padding-top: 0px;
 }
+
 .head_avatar{
 	display: inline;
 	background: transparent;
+	height: 60px;
+	width: 60px;
 }
 .navbar-brend{
 	width: 30%;
@@ -96,4 +102,7 @@
 	display: inline;
 	width: 0px;
 }
-
+a {
+    color: #405167;
+    text-decoration: none;
+}
